@@ -47,6 +47,7 @@ module VGA(input clk, reset ,
 		end
 		else if ( word_cnt > 16 ) ;
 		else begin
+			line[ (word_cnt-1) / 4 + 0 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 511 : 480 ] ;
 			line[ (word_cnt-1) / 4 + 1 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 479 : 448 ] ;
 			line[ (word_cnt-1) / 4 + 2 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 447 : 416 ] ;
 			line[ (word_cnt-1) / 4 + 3 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 415 : 384 ] ;
@@ -63,6 +64,7 @@ module VGA(input clk, reset ,
 			line[ (word_cnt-1) / 4 + 14 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 63 : 32 ] ;
 			line[ (word_cnt-1) / 4 + 15 ][ ((word_cnt-1)%4) * 32 : ((word_cnt-1)%4)*32 + 32 ] = ZiMoCode_amp[ 31 : 0 ] ;
 			word_cnt = word_cnt + 1'b1 ;
+			addr <= ZBCode[ 16 * word_cnt -1 : 0 ] ;
 		end
 	// max( x_cnt ) = 800;  max( y_cnt ) = 525 //
 	reg [ 9 : 0 ] x_cnt,y_cnt;
